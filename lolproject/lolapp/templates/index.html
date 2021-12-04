@@ -18,9 +18,14 @@
         <div style="text-align: center;">
             <h1>Summoner Name: {{ userName }}</h1>
         </div>
-
+   
         {% for objects in mastery %}
-        <div>
+        {% for key, value in championDict.items %}
+        <div> 
+            {% if objects.championId == value %}
+            <p>Champion Name: {{ key }} </p>
+            {% endif %}
+        {% endfor %}
             <p>Champion ID: {{ objects.championId }}</p>
             <p>Champion Level: {{ objects.championLevel }}</p>
             <p>Champion Points: {{ objects.championPoints }}</p>

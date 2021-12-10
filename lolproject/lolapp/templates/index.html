@@ -3,7 +3,7 @@
 <html lang="en">
 {% block content %}
 
-<body class="bg-secondary">
+<body class="bg-primary">
     <!-- Navbar -->
 
     
@@ -12,36 +12,36 @@
         <div class="form">
             <form method="post" action="{% url 'search' %}" class="mt-5 text-center">
                 {% csrf_token %}
-                <p>Use this field to input your summoner name.</p>
+                <p class="text-light">Use this field to input your summoner name.</p>
                 <div>
-                    <input type="text" name="username" id="username" placeholder="Enter Summoner Name" class="w-10 input-lg rounded-left" style="height: 3.5%;">
-                    <button class="btn btn-primary">Submit</button>
+                    <input type="text" name="username" id="username" placeholder="Enter Summoner Name" class="w-10 input-lg rounded-left" style="height: 5%;">
+                    <button class="btn btn-primary bg-warning">Submit</button>
                 </div>
             </form>
         </div>
 
-        <hr class="mt-5" style="height:4px; color: black;">
+        <hr class="mt-5 text-light" style="height: 0.1rem; color: black;">
 
-        <div class="text-center mt-4">
-            <h1>Summoner Name: {{ userName }}</h1>
+        <div class="text-center mt-5">
+            <h1 class="text-light">Summoner Name: {{ userName }}</h1>
         </div>
 
         <div class="levelWarning text-center">
-            <p><i><u><b>Note:</b> Champion progress is based on current champion level, not mastery value.</u></i></p>
+            <p class="text-light"><i><u><b>Note:</b> Champion progress is based on current champion level, not mastery value.</u></i></p>
         </div>
 
         <div class="container mb-5 w-80">
             <div class="row ms-1">
                 {% for objects in mastery %}
-                <div class="card mt-5 ms-5" style="width: 21rem;">
+                <div class="card mt-5 ms-5" style="width: 24rem;">
                     <div class="card-body">
                 {% for key, value in championDict.items %}
                     {% if objects.championId == value %}
-                    <h5 class="card-title" style="font-size: 18px;">Champ Name: {{ key }}</h5>
+                    <h5 class="card-title" style="font-size: 16px;">Champ Name: <u>{{ key }}</u></h5>
                     {% endif %}
                 {% endfor %}
 
-                    <h6 class="card-subtitle mb-2 mt-4 text-muted">Champ level: {{ objects.championLevel }} of 7</h6>
+                    <h6 class="card-subtitle mb-2 mt-4 text-bold">Champ level: {{ objects.championLevel }} of 7</h6>
                     <div class="progress mb-1" style="height: 16%;">
                     {% if objects.championLevel == 1 %}
                         <div class="progress-bar bg-danger" role="progressbar" style="width: 14%" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100"></div>
@@ -59,7 +59,7 @@
                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     {% endif %}
                     </div>
-                    <p class="card-text mb-5 text-muted">Champion Mastery: <b>{{ objects.championPoints }}</b></p>
+                    <p class="card-text mb-5 text-bold">Champion Mastery: <b>{{ objects.championPoints }}</b></p>
                     </div>
                 </div>
                 {% endfor %}

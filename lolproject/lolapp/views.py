@@ -1,9 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import os
 import requests
 import json
 from urllib.request import urlopen
 from dotenv import load_dotenv
+
+# Caching Imports 
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.views.decorators.cache import cache_page
+
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 
 # Load the .env file
@@ -11,6 +18,7 @@ load_dotenv()
 
 
 # Create your views here.
+@cache_page(CACHE_TTL)
 def home(request):
     return render(request, './index.html')
 
@@ -60,3 +68,7 @@ def search(request):
 
 def about(request):
     return render(request, './about.html')    
+
+def redirect_view(request):
+    response = redirect('/app')
+    return response

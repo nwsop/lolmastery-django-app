@@ -26,7 +26,7 @@ def search(request):
     if request.method == "POST":
         # User searches for name and gets their encrypted ID
         userName = request.POST.get('username')
-        api_key = os.getenv("API_KEY")
+        api_key = os.getenv("APIKEY")
         #api_key = ""
 
         response = requests.get('https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+ userName +'?api_key='+ api_key)
